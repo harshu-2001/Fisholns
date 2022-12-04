@@ -161,14 +161,15 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30)),
+                              child: SizedBox(
                                   height: 300,
                                   width: 300,
-                                  child: Image.file(
-                                    _image!,
-                                    fit: BoxFit.fill,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.file(
+                                      _image!,
+                                      fit: BoxFit.fill,
+                                    ),
                                   )),
                             ),
                             TextButton(
@@ -266,10 +267,16 @@ class _MyHomePageState extends State<MyHomePage> {
               _loading == true
                   ? ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => Details(
-                                s: "${_outputs![0]["label"]}"
-                                    .replaceAll(RegExp(r'[0-9]'), ''))));
+                        // print("${_outputs![0]["label"]}");
+                        String out = _outputs![0]["label"]
+                            .replaceAll(RegExp(r'[0-9]'), '');
+                        print(out);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Details(
+                                      s: out,
+                                    )));
                       },
                       child: const Text(
                         "Details",
